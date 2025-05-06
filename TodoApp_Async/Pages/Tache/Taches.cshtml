@@ -2,18 +2,61 @@
 @model TodoApp_Async.Pages.Tache.Taches
 
 @{
-    Layout = null;
+    ViewData["title"] = "Taches";
 }
-
-<!DOCTYPE html>
-
-<html>
-<head>
-    <title></title>
-</head>
-<body>
-<div>
-    
+<div class="columns">
+    <div class="column">
+        <a class="btn btn-link" asp-page="/Tache/Creer">Nouvelle tâche</a>
+    </div>
 </div>
-</body>
-</html>
+<div class="columns">
+    <div class="column">
+        <p>Liste des tâches</p>
+        <table class="table is-fullwidth">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Matricule</th>
+                <th>Titre</th>
+                <th>Description</th>
+                <th>Statut</th>
+                <th>Date Création</th>
+                <th>Date Limite</th>
+                <th>Priorité</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            @if (Model.taches.Count > 0)
+            {
+                @foreach (var t in Model.taches)
+                {
+                    <tr>
+                        <td>@t.Id</td>
+                        <td>@t.MatriculeAgent</td>
+                        <td>@t.Titre</td>
+                        <td>@t.Details</td>
+                        <td>@t.Statut</td>
+                        <td>@t.DateCreation</td>
+                        <td>@t.DateLimite</td>
+                        <td>@t.NiveauPriorite</td>
+                        <td>
+                            <a class="button is-link is-small">Modifier</a>
+                            <a class="button is-success is-small">Terminer</a>
+                            <a class="button is-danger is-small">Supprimer</a>
+                        </td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="8" class="text-center">
+                        Aucune tâche trouvée dans la base de données...
+                    </td>
+                </tr>
+            }
+            </tbody>
+        </table>
+    </div>
+</div>

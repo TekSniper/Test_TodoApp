@@ -1,5 +1,10 @@
+@font-face {
+  font-family: 'Ubuntu';
+  src: url("../fonts/Ubuntu-Regular.ttf");
+}
 html {
   font-size: 14px;
+  font-family: 'Ubuntu', sans-serif;
 }
 
 @media (min-width: 768px) {
@@ -19,4 +24,8 @@ html {
 
 body {
   margin-bottom: 60px;
+  font-family: 'Ubuntu', sans-serif;
+}
+input,select,textarea{
+  font-family: 'Ubuntu', sans-serif;
 }

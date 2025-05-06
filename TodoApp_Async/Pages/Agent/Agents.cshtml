@@ -2,18 +2,50 @@
 @model TodoApp_Async.Pages.Agent.Agents
 
 @{
-    Layout = null;
+    ViewData["title"] = "Agents";
 }
 
-<!DOCTYPE html>
-
-<html>
-<head>
-    <title></title>
-</head>
-<body>
-<div>
-    
+<div class="columns">
+    <div class="column">
+        <a asp-page="/Agent/Creer">Nouvel Agent</a>
+    </div>
 </div>
-</body>
-</html>
+<div class="columns">
+    <div class="column">
+        <p>Les agents</p>
+        <table class="table is-fullwidth">
+            <thead>
+            <tr>
+                <th>Matricule</th>
+                <th>Nom</th>
+                <th>Prénom</th>
+                <th>Email</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            @if (Model.agents.Count > 0)
+            {
+                @foreach (var a in Model.agents)
+                {
+                    <tr>
+                        <td>@a.Matricule</td>
+                        <td>@a.Nom</td>
+                        <td>@a.Prenom</td>
+                        <td>@a.Email</td>
+                        <td>
+                            <a href="/Agent/Modifier?agent=@a.Matricule" class="button is-small is-link">Modifier</a>
+                        </td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="4">Aucun agent</td>
+                </tr>
+            }
+            </tbody>
+        </table>
+    </div>
+</div>

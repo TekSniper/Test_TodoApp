@@ -2,18 +2,61 @@
 @model TodoApp_Async.Pages.Agent.Creer
 
 @{
-    Layout = null;
+    ViewData["title"] = "Nouvel Agent";
 }
 
-<!DOCTYPE html>
-
-<html>
-<head>
-    <title></title>
-</head>
-<body>
-<div>
-    
+<h3 class="subtitle">Nouvel Agent</h3>
+<div class="box">
+    <div class="columns is-centered">
+        <div class="column is-half">
+            @if (ViewData.ModelState.ContainsKey("agent") && ViewData.ModelState["agent"].Errors.Count > 0)
+            {
+                <div class="notification is-warning is-light">
+                    <button class="delete"></button>
+                    <p class="subtitle">Attention !</p>
+                    <p>@ViewData.ModelState["agent"].Errors[0].ErrorMessage</p>
+                </div>
+            }
+            
+            @if (ViewData.ModelState.ContainsKey("erreur") && ViewData.ModelState["erreur"].Errors.Count > 0)
+            {
+                <div class="notification is-danger is-light">
+                    <button class="delete"></button>
+                    <p class="subtitle">Erreur !</p>
+                    <p>@ViewData.ModelState["erreur"].Errors[0].ErrorMessage</p>
+                </div>
+            }
+            <form method="post">
+                <div class="field">
+                    <label class="label" for="matricule">N° Matricule <span class="has-text-danger">*</span></label>
+                    <div class="control">
+                        <input type="text" class="input" placeholder="N° Matricule" id="matricule" asp-for="agent.Matricule">
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label" for="nom">Nom <span class="has-text-danger">*</span></label>
+                    <div class="control">
+                        <input type="text" class="input" placeholder="Nom" id="nom" asp-for="agent.Nom"/>
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label" for="prenom">Prénom</label>
+                    <div class="control">
+                        <input type="text" class="input" placeholder="Prénom" id="prenom" asp-for="agent.Prenom"/>
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label" for="email">Email <span class="has-text-danger">*</span></label>
+                    <div class="control">
+                        <input type="email" class="input" placeholder="lorem@exemple.com" id="email" asp-for="agent.Email"/>
+                    </div>
+                </div>
+                <div class="field">
+                    <div class="control">
+                        <button type="submit" class="button is-success is-fullwidth">Enregistrer</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
 </div>
-</body>
-</html>
