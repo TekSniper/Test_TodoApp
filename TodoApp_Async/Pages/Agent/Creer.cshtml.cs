@@ -7,6 +7,7 @@ public class Creer : PageModel
 {
     [BindProperty]
     public Agent_Entity agent { get; set; } = new Agent_Entity();
+    public IAgentRepository agentRepository = new AgentRepository();
     public void OnGet()
     {
         
@@ -23,15 +24,23 @@ public class Creer : PageModel
             }
             else
             {
-                using (var cnx = new DbConnexion().GetConnection())
+                var msg = await agentRepository.CreateAgentAsync(agent);
+                if (msg == "Succès")
                 {
-                    await cnx.OpenAsync();
-                    var cm = new SqlCommand("insert into agent values(@matricule, @nom, @prenom, @email)", cnx);
-                    cm.Parameters.AddWithValue("@matricule", agent.Matricule);
-                    cm.Parameters.AddWithValue("@nom", agent.Nom);
-                    cm.Parameters.AddWithValue("@prenom", agent.Prenom);
-                    cm.Parameters.AddWithValue("@email", agent.Email);
-                    await cm.ExecuteNonQueryAsync();
+                    
+                }
+                else
+                {
+                    if (msg == "Echec")
+                    {
+                        ModelState.AddModelError("erreur", "Echec de l'enregistrement");
+                        return Page();      ;
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("erreur", msg);
+                        return Page();       ;
+                    }
                 }
             }
 

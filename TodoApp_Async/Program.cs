@@ -1,5 +1,7 @@
 global using TodoApp_Async.Entities;
 global using Microsoft.Data.SqlClient;
+global using Dapper;
+global using TodoApp_Async.Services;
 
 
 var builder = WebApplication.CreateBuilder(args);
